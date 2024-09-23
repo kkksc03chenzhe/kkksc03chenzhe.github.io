@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电子木鱼</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://tse3-mm.cn.bing.net/th/id/OIP-C.KxI8a2e9nMNg6pr1RgFPsgHaE_?rs=1&pid=ImgDetMain');
+            background-size: cover;
+        }
+
+        #woodenFish {
+            width: 536px;
+            height: 357px;
+            background-image: url('https://bkimg.cdn.bcebos.com/pic/caef76094b36acaf3980f66e76d98d1001e99c3b?x-bce-process=image/format,f_auto/quality,Q_70/resize,m_lfit,limit_1,w_536');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        #woodenFish:active {
+            transform: scale(0.9);
+        }
+
+        h1 {
+            color: white;
+            /* 设置标题颜色为白色 */
+        }
+
+        h2 {
+            margin-top: 20px;
+            font-size: 24px;
+            color: white;
+            /* 设置字体颜色为白色 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="https://cdn.luogu.com.cn/upload/image_hosting/ypn123i0.png"
+        style="position: absolute; left: 20px; top: 20px; width: 350px;">
+
+    <h1>让我们来攒功德击败金池长老/<h1>
+    <h3>洛谷用户LJT_Never_TLE出品</h3>
+    <h3>功德达到30000即可打败金池长老</h3>
+    <div id="woodenFish"></div>
+    <h2 id="merit">功德：0</h2>
+
+    <audio id="sound" src="https://img.tukuppt.com/newpreview_music/09/00/71/5c89465032f0c47285.mp3"></audio>
+
+    <script>
+        (function () {
+            var a_idx = 0;
+            window.onclick = function (event) {
+                var a = new Array("❤You will AK IOI!❤", "❤You will AK CSP-S!❤", "❤You will AK NOI!❤", "❤You will AK NOIP!❤", "❤You will AK CSP-J!❤", "❤You will AK USACO❤", "❤You will AK WC!❤", "❤You will AK CTSC!❤", "❤You will AK JOI!❤", "❤You will AK APIO!❤", "❤You are a good ACMer!❤", "❤You are a good OIer!❤");
+
+                var heart = document.createElement("b");
+                heart.onselectstart = new Function('event.returnValue=false');
+
+                document.body.appendChild(heart).innerHTML = a[a_idx];
+                a_idx = (a_idx + 1) % a.length;
+                heart.style.cssText = "position: fixed;left:-100%;";
+
+                var f = 16,
+                    x = event.clientX - f / 2,
+                    y = event.clientY - f,
+                    c = randomColor(),
+                    a = 1,
+                    s = 1.2;
+
+                var timer = setInterval(function () {
+                    if (a <= 0) {
+                        document.body.removeChild(heart);
+                        clearInterval(timer);
+                    } else {
+                        heart.style.cssText = "font-size:16px;cursor: default;position: fixed;color:" +
+                            c + ";left:" + x + "px;top:" + y + "px;opacity:" + a + ";transform:scale(" +
+                            s + ");";
+
+                        y--;
+                        a -= 0.016;
+                        s += 0.002;
+                    }
+                }, 15)
+
+            }
+            function randomColor() {
+                return "rgb(" + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + "," + (~~(Math.random() * 255)) + ")";
+            }
+        }());
+
+        const woodenFish = document.getElementById('woodenFish');
+        const sound = document.getElementById('sound');
+        const meritDisplay = document.getElementById('merit');
+
+        let merit = 0;
+
+        woodenFish.addEventListener('click', () => {
+            sound.currentTime = 0;
+            sound.play();
+            merit += 1;
+            meritDisplay.textContent = `功德：${merit}`;
+        });
+    </script>
+
+</body>
+
+</html>
